@@ -1,10 +1,11 @@
 import Header from "@/shared/widgets/header/header";
 import React from "react";
-import Banner from "./features/Banner";
-import Branding from "./features/Branding";
-import Benefits from "./features/Benefits";
-import FeatureHighlight from "./features/feature.highlights";
-import Pricing from "./features/pricing";
+import Banner from "./elements/Banner";
+import Branding from "./elements/Branding";
+import Benefits from "./elements/Benefits";
+import FeatureHighlight from "./elements/feature.highlights";
+import Pricing from "./elements/pricing";
+import Footer from "../../shared/widgets/footer/footer";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <Benefits />
       <FeatureHighlight />
       <Pricing />
+      <Footer />
     </div>
   );
 };
