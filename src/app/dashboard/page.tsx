@@ -1,11 +1,8 @@
+import Dashboard from "@/modules/dashboard";
 import React from "react";
 
 const Page = () => {
-  return (
-    <div className="w-full flex h-screen items-center justify-center">
-      chirag munjal
-    </div>
-  );
+  return <Dashboard />;
 };
 
 export default Page;
