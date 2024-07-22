@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@nextui-org/react";
 
 import toast from "react-hot-toast";
+import { saveEmail } from "@/actions/save.email";
 
 const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,23 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
     unlayer.loadDesign(jsonData);
   };
 
+  const saveDraft = async () => {
+    const unlayer = emailEditorRef.current?.editor;
+
+    unlayer?.exportHtml(async (data) => {
+      const { design } = data;
+
+      await saveEmail({
+        title: subjectTitle,
+        content: JSON.stringify(design),
+        newsLetterOwnerId: user?.id!,
+      }).then((res: any) => {
+        toast.success(res.message);
+        history.push("/dashboard/write");
+      });
+    });
+  };
+
   return (
     <>
       {!loading && (
@@ -39,7 +57,10 @@ const Emaileditor = ({ subjectTitle }: { subjectTitle: string }) => {
             onReady={onReady}
           />
           <div className="absolute bottom-0 flex items-center justify-end gap-4 right-0 w-full border-t p-3">
-            <Button className="bg-transparent cursor-pointer flex items-center gap-1 text-black border border-[#00000048] text-lg rounded-lg">
+            <Button
+              className="bg-transparent cursor-pointer flex items-center gap-1 text-black border border-[#00000048] text-lg rounded-lg"
+              onClick={saveDraft}
+            >
               <span className="opacity-[.7]">Save Draft</span>
             </Button>
             <Button
